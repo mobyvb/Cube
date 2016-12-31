@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <title>Cube</title>
+    <meta charset="UTF-8">
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
+      #image-analyzer {
+        display: none;
+      }
+      .side-skin {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <img src='img/side1.png' id='side-1' class='side-skin'>
+    <img src='img/side2.png' id='side-2' class='side-skin'>
+    <img src='img/side3.png' id='side-3' class='side-skin'>
+    <img src='img/side4.png' id='side-4' class='side-skin'>
+    <img src='img/side5.png' id='side-5' class='side-skin'>
+    <img src='img/side6.png' id='side-6' class='side-skin'>
+    <canvas id='image-analyzer'></canvas>
+
+    <script src='js/Room.js'></script>
+    <script src='js/three.js'></script>
+    <script>
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize( window.innerWidth, window.innerHeight );
+      document.body.appendChild( renderer.domElement );
+
+      // var geometry = new THREE.PlaneGeometry(1, 1);
+      // var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+      // var plane = new THREE.Mesh( geometry, material );
+      // plane.position.set(0, 0, 0);
+      // scene.add(plane);
+
+      // material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+      // plane = new THREE.Mesh( geometry, material );
+      // plane.position.set(1, 0, 0);
+      // scene.add(plane);
+
+      camera.position.z = 20;
+      camera.position.x = 5;
+      camera.position.y = 5;
+      // camera.rotation.x = Math.PI;
+
+      var imageList = ['side-1', 'side-2', 'side-3', 'side-4', 'side-5', 'side-6'];
+      var level1 = new Room(scene, 10, imageList);
+
+      var render = function () {
+        requestAnimationFrame( render );
+
+        // plane.rotation.x += 0.01;
+        // plane.rotation.y += 0.01;
+
+        renderer.render(scene, camera);
+      };
+
+      render();
+    </script>
+  </body>
+</html>
